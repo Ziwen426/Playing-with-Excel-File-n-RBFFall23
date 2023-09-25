@@ -1,0 +1,170 @@
+---
+title: "Yanzi Ji_BUSF_HM1"
+output:
+  pdf_document: default
+  html_document: default
+date: "2023-09-25"
+---
+
+# Heading (one hash)
+
+## Heading 2 (two hashes)
+
+### Sub heading (3 hashes)
+
+#### Sub heading 2 (4 hashes)
+
+##### Bold text (5 hashes)
+
+###### End
+
+```{r}
+
+air <- AirPassengers 
+air
+```
+
+```{r}
+plot(air)
+```
+
+```{r}
+#Yanzi Ji
+
+#1. Load Data and Add Header Row:
+
+install.packages("readxl")
+library(readxl)
+
+survey_data <- read_excel("/Users/wangd07/Desktop/gabage/2023fall/Business Forecasting/HM/Typical_Employee_Survey_Data.xlsx", col_names = FALSE)
+
+
+names(survey_data) <- c("Age", "Gender", "Job_Satisfaction", "Important_Job_Characteristic", 
+             "Years_At_Company", "Promotion_Possibility", "Decision_Participation",
+             "Budgetary_Participation", "Organizational_Pride", "Job_Retention_Possibility",
+             "Workplace_Relations")
+       
+```
+
+```{r}
+#2.1 5-point summary 
+names(survey_data)
+ncol(survey_data)
+nrow(survey_data)
+dim(survey_data)
+head(survey_data)
+tail(survey_data)
+str(survey_data)
+
+min(survey_data$Age)
+max(survey_data$Age)
+range(survey_data$Age)
+StatRange = max(survey_data$Age) - min(survey_data$Age)
+StatRange
+mean(survey_data$Age)
+sd(survey_data$Age)
+var(survey_data$Age)
+sqrt(var(survey_data$Age))
+fivenum(survey_data$Age)
+IQR(survey_data$Age)
+quantile(survey_data$Age)
+summary(survey_data$Age)
+```
+
+```{r}
+#2.2 boxplot (numerical columns) for each column:
+boxplot(survey_data$Age,survey_data$Gender,survey_data$Job_Satisfaction, survey_data$Important_Job_Characteristic,survey_data$Years_At_Company, survey_data$Promotion_Possibility,survey_data$Decision_Participation,
+survey_data$Budgetary_Participation,survey_data$Organizational_Pride, survey_data$Job_Retention_Possibility,survey_data$Workplace_Relations)
+
+```
+
+```{r}
+#4. Plot the right visual for each column 
+barplot(survey_data$Age)
+
+barplot(survey_data$Age, main = "Job_Satisfaction of Age", xlab = "Age", ylab = "Job_Satisfaction", col = "Blue",names.arg = survey_data$Job_Satisfaction)
+
+stem(survey_data$Job_Retention_Possibility)
+stem(survey_data$Job_Retention_Possibility)
+hist(survey_data$Job_Retention_Possibility)
+
+barplot(survey_data$Important_Job_Characteristic)
+barplot(survey_data$Age, main = "Important_Job_Characteristic of Age", xlab = "Age", ylab = "Important_Job_Characteristic", col = "Red",names.arg = survey_data$Important_Job_Characteristic)
+
+barplot(survey_data$Age)
+barplot(survey_data$Age, main = "Years_At_Company of Age", xlab = "Age", ylab = "Years_At_Company", col = "Yellow",names.arg = survey_data$Years_At_Company)
+
+barplot(survey_data$Age)
+barplot(survey_data$Age, main = "Promotion_Possibility of Age", xlab = "Age", ylab = "Promotion_Possibility", col = "Green",names.arg = survey_data$Promotion_Possibility)
+
+barplot(survey_data$Gender)
+barplot(survey_data$Gender, main = "Decision_Participation of Gender", xlab = "Gender", ylab = "Decision_Participation", col = "Purple",names.arg = survey_data$Decision_Participation)
+
+barplot(survey_data$Gender)
+barplot(survey_data$Gender, main = "Budgetary_Participation of Gender", xlab = "Gender", ylab = "Budgetary_Participation", col = "grey",names.arg = survey_data$Budgetary_Participation)
+
+barplot(survey_data$Gender)
+barplot(survey_data$Gender, main = "Organizational_Pride of Gender", xlab = "Gender", ylab = "Organizational_Pride", col = "black",names.arg = survey_data$Organizational_Pride)
+
+barplot(survey_data$Age)
+barplot(survey_data$Age, main = "Job_Retention_Possibility of Age", xlab = "Age", ylab = "Job_Retention_Possibility", col = "orange",names.arg = survey_data$Job_Retention_Possibility)
+
+pie(survey_data$Age)
+pie(survey_data$Age,label = survey_data$Job_Retention_Possibility, main = "Job_Retention_Possibility of Age")
+
+barplot(survey_data$Workplace_Relations)
+barplot(survey_data$Gender, main = "Workplace_Relations of Gender", xlab = "Gender", ylab = "Workplace_Relations", col = "cornflower blue",names.arg = survey_data$Workplace_Relations)
+```
+
+```{r}
+#5.Plot scatter plots to show few relationships
+
+plot(survey_data$Age, survey_data$Years_At_Company, 
+     main = "Age vs Years At Company", 
+     xlab = "Age", ylab = "Years at Company",
+     col = "blue")
+
+plot(survey_data$Gender, survey_data$Years_At_Company, 
+     main = "Gender vs Years At Company", 
+     xlab = "Gender", ylab = "Years at Company",
+     col = "Green")
+     
+```
+
+```{r}
+#3. Convert the columns that need to be converted to Factors
+
+factor_columns <- c("Gender", "Job_Satisfaction", "Important_Job_Characteristic", 
+                    "Promotion_Possibility", "Decision_Participation", 
+                    "Budgetary_Participation", "Organizational_Pride",
+                    "Job_Retention_Possibility", "Workplace_Relations")
+
+for(column in factor_columns) 
+  survey_data[[column]] <- factor(survey_data[[column]])
+```
+
+}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
